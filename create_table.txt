@@ -1,0 +1,70 @@
+create type PRIVILEGE as enum('manager','employee');
+
+CREATE TABLE user_tbl ( 
+user_id  VARCHAR(20) PRIMARY KEY, 
+first_name VARCHAR(20), 
+last_name  VARCHAR(20), 
+privilege  PRIVILEGE,
+password varchar(20)); 
+
+CREATE TABLE customer_tbl ( 
+customer_id  VARCHAR(20) PRIMARY KEY, 
+first_name VARCHAR(10), 
+last_name  VARCHAR(10), 
+Street VARCHAR(100),
+city VARCHAR(20), 
+state VARCHAR(20), 
+available_point INT); 
+
+create type PRODUCTCATEGORY as enum('Beverages','Donuts','Bagels');
+
+CREATE TABLE product_tbl ( 
+product_id  VARCHAR(20) PRIMARY KEY,
+name VARCHAR(20), 
+price FLOAT, 
+number_in_stock INT, 
+category PRODUCTCATEGORY); 
+
+CREATE TABLE transaction_tbl ( 
+transaction_id  VARCHAR(20) PRIMARY KEY, 
+customer_id VARCHAR(20),
+price FLOAT,
+time TIMESTAMP,
+FOREIGN KEY(customer_id) REFERENCES customer_tbl(customer_id)); 
+
+CREATE TABLE session_tbl (
+user_id VARCHAR(20), 
+login_time  TIMESTAMP,
+logout_time TIMESTAMP, 
+PRIMARY KEY (login_time,
+logout_time,user_id),
+FOREIGN KEY (user_id) REFERENCES user_tbl(user_id)); 
+
+CREATE TABLE sale_tbl (
+transaction_id VARCHAR(20), 
+product_id VARCHAR(20),
+quantity INT, 
+PRIMARY KEY (product_id, transaction_id),
+FOREIGN KEY (product_id) REFERENCES product_tbl(product_id),
+FOREIGN KEY (transaction_id) REFERENCES transaction_tbl(transaction_id));
+
+
+
+INSERT INTO user_tbl(
+user_id,first_name,
+last_name,privilege,
+password)VALUES ('Amy123','Amy','White','manager','123');
+
+INSERT INTO user_tbl(user_id,first_name,last_name,privilege,password)VALUES ('harry123','harry','potter','manager','123');
+
+INSERT INTO transaction_tbl(transaction_id,customer_id,price,time)VALUES ();
+
+SELECT user_id FROM user_tbl where user_id =
+
+UPDATE customer_tbl SET available_point= available_point-100 WHERE customer_id =';
+UPDATE product_tbl SET number_in_stock = number_in_stock-pro_1 WHERE product_id ='001';
+
+INSERT INTO session_tbl(user_id,login_time,logout_time) VALUES()
+
+INSERT INTO user_tbl(user_id, first_name, last_name, privilege, password) VALUES('we324','www','liu','manager','123');
+;
